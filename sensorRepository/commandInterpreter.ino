@@ -82,6 +82,9 @@ int execCommand(char* cmd, char* result)
   
   if (!strcmp(lastToken, "boardid"))
     return execCommandBoardId(result);
+
+   if (!strcmp(lastToken, "setid"))
+    return execCommandSetId(result);
   
   if (!strcmp(lastToken, "suspend"))  
     return execCommandSuspend(result);
@@ -309,6 +312,16 @@ int execCommandListSensors(char* result)
   }
   
   return RETURN_OK;
+}
+
+int execCommandSetId(char* result)
+{
+  char id[TOKEN_SIZE];
+  if (nextTokenString(id))
+    return RETURN_INVALIDPARAMS;
+
+   depositId = String(id);
+   return RETURN_OK;
 }
 
 
