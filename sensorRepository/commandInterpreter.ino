@@ -94,6 +94,9 @@ int execCommand(char* cmd, char* result)
     
   if (!strcmp(lastToken, "reboot"))
     return execCommandReboot(result);
+
+  if (!strcmp(lastToken, "sleep"))
+    return execCommandSleep(result);
   
     
   // Unknown command.
@@ -186,7 +189,21 @@ int isTypeAllowed(int type)
  * Commands list.
  * You can add command at the end of this section.
  *******************************************************************************************/
+int execCommandSleep(char* result)
+{
+  // Get sleeping time
+  int time;
+  if (nextTokenInt(&time))
+    return RETURN_INVALIDPARAMS;
 
+  // Select the appropriate watchdog according to the datasheet
+  if (time % 8) return SLEEP_8(time);
+  else if (time % 4) return SLEEP_4(time);
+  else if (time % 2) return SLEEP_2(time);
+  else return SLEEP_1(time);
+
+  
+}
 /**
  * Add a sensor to the Arduino platform.
  *
