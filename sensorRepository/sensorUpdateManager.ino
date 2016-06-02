@@ -71,14 +71,23 @@ void printDataJson(char* sensorName, int sensorValue, unsigned long timestamp)
    #ifdef USE_XBEE 
    comm.send(" ");
    #endif
+
+   comm.send("D:");
+   
+  char currentTimestamp[32];
+  String value3 = String(millis());
+  value3.toCharArray(currentTimestamp, 32);
+  
+   comm.send("{\"t\":"); comm.send(currentTimestamp); comm.send(",\"src\":\""); comm.send(depositId); comm.send("\", \"data\":");
+
    // Display sensor's name
-   comm.send("D: {n:"); comm.send(sensorName);comm.send(",");
+   comm.send("{\"n\":\""); comm.send(sensorName);comm.send("\",");
    // Display value
-   comm.send("v:"); comm.send(sensorValueChar); comm.send(",");
+   comm.send("\"v\":"); comm.send(sensorValueChar); comm.send(",");
    // Display timestamp
-   comm.send("t:"); comm.send(timestampValueChar);
+   comm.send("\"t\":"); comm.send(timestampValueChar);
    // Close JSON
-   comm.send("}"); 
+   comm.send("}}"); 
    comm.send("\n");
    Serial.flush();
 }
