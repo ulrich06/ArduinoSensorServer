@@ -10,7 +10,7 @@
 /** Arduino setup end message */
 #define SETUP_TERMINATED "I: Setup terminated\n\r"
 
-#define SMARTCAMPUSOS "SmartCampusOS v2"
+#define SMARTCAMPUSOS "DEPOSIT/MWDB"
 
 /** Command buffer */
 char command[COMMAND_BUFFER_LENGTH];
@@ -18,11 +18,14 @@ char command[COMMAND_BUFFER_LENGTH];
 /** Command response buffer */
 char result[RESPONSE_BUFFER_LENGTH];
 
+
+
 void int2char(int a, char * result){
   String str;
   str = String(a);
   str.toCharArray(result, 16);
 }
+
 
 void setup()
 {
@@ -35,6 +38,7 @@ void setup()
   Serial.begin(9600);
   comm.send(SETUP_TERMINATED); 
   Serial.flush();
+  
 }
 
 

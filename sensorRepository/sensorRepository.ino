@@ -24,8 +24,9 @@
 
 #define MAX_SENSORS 10 // Maximum number of sensor on an Arduino platform
 #define TOKEN_SIZE 30  // Max token size.  
-#define BOARD_ID "ARD_1_442"  // Board ID.
+#define BOARD_ID "ARD_DEMO"  // Board ID.
 
+String depositId = "";
 /*******************************************************************************************
  * Sensor available types.
  * Each time you add a new librairie, add also a new sensor type.
